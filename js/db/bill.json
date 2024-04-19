@@ -3,13 +3,49 @@
         {
             "cc": 34235,
             "full_name": "pepito perez",
-            "product": [
+            "products": [
                 {
                     "description": "incluye version desktop",
                     "quantity": 2,
                     "price": 100,
                     "total": 200
-                }
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                },
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                }          
             ]
         }
     ]
