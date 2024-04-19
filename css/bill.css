@@ -1,0 +1,28 @@
+@import url(variables.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto-Regular";
+}
+
+.main{
+    background: ;
+
+}
+
+.section-details{
+    text-align: center;
+}
+
+.details-table{
+
+}
+
+
+.details-table thead{
+
+    background: orange;
+
+}

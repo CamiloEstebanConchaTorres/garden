@@ -1,0 +1,16 @@
+{
+    "camper": [
+        {
+            "cc": 34235,
+            "full_name": "pepito perez",
+            "product": [
+                {
+                    "description": "incluye version desktop",
+                    "quantity": 2,
+                    "price": 100,
+                    "total": 200
+                }
+            ]
+        }
+    ]
+}
