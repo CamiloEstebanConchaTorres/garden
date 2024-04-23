@@ -6,7 +6,21 @@ import {
 import {
     getAllEmployeersWithBossCODE7,
     getBOSS,
-    getAll
+    getAllNotRepresent
 } from "../module/employees.js";
 
-console.log(await getBOSS());
+import {
+    getAllClientSpanishPeople
+} from "../module/clients.js";
+
+import {
+    getAllProductStatus,
+    getAllLateOrders
+} from "../module/requests.js";
+
+import {
+    getClientCodesWithPaymentsIn2008
+} from "../module/payments.js";
+
+
+console.log(await getAllLateOrders());
