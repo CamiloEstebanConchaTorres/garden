@@ -28,3 +28,14 @@ export const getAllOficcesCOdeAndCity = async  () => {
     });
     return dataUpdate;
   }
+
+
+// SEGUNDA PARTE ////////////////////////////////////////////////
+// EJERCICIO 7 DE SEGUNDA PARTE //////////////////////////////////////////////////////////////
+
+
+export const getOfficesByCode = async(code) =>{
+    let res = await fetch(`http://localhost:5504/offices?code_office=${code}`);
+    let dataClients = await res.json();
+    return dataClients;
+}
