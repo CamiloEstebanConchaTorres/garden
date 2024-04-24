@@ -10,17 +10,27 @@ import {
 } from "../module/employees.js";
 
 import {
-    getAllClientSpanishPeople
+    getAllClientSpanishPeople,
+    getClientsInMadridWithSalesRepresentatives
 } from "../module/clients.js";
 
 import {
     getAllProductStatus,
-    getAllLateOrders
+    getAllLateOrders,
+    getEarlyOrders,
+    getRejectedOrdersInYear,
+    getDeliveredOrdersInJanuary
 } from "../module/requests.js";
 
 import {
-    getClientCodesWithPaymentsIn2008
+    getClientCodesWithPaymentsIn2008,
+    getPaymentsIn2008ViaPaypal,
+    getUniquePaymentMethods
 } from "../module/payments.js";
 
+import {
+    getOrnamentalProductsOver100Units    
+} from "../module/gama.js";
 
-console.log(await getAllLateOrders());
+
+console.log(await getClientsInMadridWithSalesRepresentatives());
