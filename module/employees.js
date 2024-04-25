@@ -56,3 +56,22 @@ export const getEmployByCode = async(code) =>{
     let dataClients = await res.json();
     return dataClients;
 }
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 1. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
+// 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
+// 3. Muestra el nombre de los clientes que **no** hayan realizado pagos junto con el nombre de sus representantes de ventas.
+// 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+// 5. Devuelve el nombre de los clientes que **no** hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+// 6. Lista la dirección de las oficinas que tengan clientes en `Fuenlabrada`.
+
+export const getEmployees = async () => {
+    let res = await fetch("http://localhost:5502/employees");
+    let employees = await res.json();
+    return employees;
+}
+
+
+
+
+

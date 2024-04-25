@@ -1,6 +1,7 @@
 import {
     getAllOficcesCOdeAndCity,
-    getAllOficcesFromSpainCityAndMovil
+    getAllOficcesFromSpainCityAndMovil,
+    getOffices
 } from "../module/offices.js";
 
 import {
@@ -12,7 +13,13 @@ import {
 import {
     getAllClientSpanishPeople,
     getClientsInMadridWithSalesRepresentatives,
-    getClientsEmploy
+    getClientsEmploy,
+    getClientSalesRepresentatives,
+    getClientsWithSalesRepresentativesAndPayments,
+    getClientsWithoutPaymentsAndSalesRepresentatives,
+    getClientsWithPaymentsAndRepresentativesAndOffices,
+    getClientsWithNoPaymentsAndRepresentativesAndOffices,
+    getOfficesWithClientsInFuenlabrada
 } from "../module/clients.js";
 
 import {
@@ -34,4 +41,4 @@ import {
 } from "../module/gama.js";
 
 
-console.log(await getClientsEmploy());
+console.log(await getOfficesWithClientsInFuenlabrada());

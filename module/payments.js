@@ -40,4 +40,22 @@ export const getUniquePaymentMethods = async () => {
     return uniquePaymentMethods;
 }
 
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
 
+export const getPayments = async () => {
+    let res = await fetch("http://localhost:5505/payments");
+    let payments = await res.json();
+    return payments;
+}
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 3. Muestra el nombre de los clientes que **no** hayan realizado pagos junto con el nombre de sus representantes de ventas.
+// 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+// 5. Devuelve el nombre de los clientes que **no** hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+
+export const getUnpaidClients = async () => {
+    let res = await fetch("http://localhost:5505/payments");
+    let payments = await res.json();
+    return payments;
+}
