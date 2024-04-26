@@ -41,4 +41,4 @@ import {
 } from "../module/gama.js";
 
 
-console.log(await getOfficesWithClientsInFuenlabrada());
+console.log(await getAllEmployeersWithBossCODE7());
