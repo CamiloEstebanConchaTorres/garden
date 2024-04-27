@@ -41,4 +41,4 @@ import {
 } from "../module/gama.js";
 
 
-console.log(await getClientsInMadridWithSalesRepresentatives());
+console.log(await getClientsEmploy());
