@@ -1,6 +1,8 @@
 
 // IMPORTACIONES PARA EL EJERCICIO 07, EJECICIO 01, EJERCICIO 02, 
-// EJERCICIO 03, EJERCICIO 04, EJERCICIO 05, EJERCICIO 06 DE LA SEGUNDA PARTE/////
+// EJERCICIO 03, EJERCICIO 04, EJERCICIO 05, 
+// EJERCICIO 06, EJERCICIO 08, EJERCICIO 09 
+// DE LA SEGUNDA PARTE/////
 import { 
     getEmployByCode,
     getEmployees
@@ -16,6 +18,16 @@ import {
     getPayments,
     getUnpaidClients
 } from "./payments.js";
+
+import { 
+    getRequests
+} from "./requests.js";
+
+import { 
+    getProductRanges
+} from "./gama.js";
+
+
 /////////////////////////////////////////////////////////////////
 
 
@@ -277,4 +289,114 @@ export const getOfficesWithClientsInFuenlabrada = async () => {
     );
     let addresses = officesInFuenlabrada.map(office => office.address1);
     return addresses;
+}
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+
+
+export const getEmployeesWithBossNames = async () => {
+    let resEmployees = await fetch("http://localhost:5502/employees");
+    let employees = await resEmployees.json();
+    let bossNamesMap = new Map();
+    employees.forEach(employee => {
+        if (employee.code_boss !== null) {
+            let boss = employees.find(emp => emp.employee_code === employee.code_boss);
+            if (boss) {
+                bossNamesMap.set(employee.employee_code, boss.name);
+            }
+        }
+    });
+    let employeesWithBossNames = employees.map(employee => ({
+        employee_name: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
+        boss_name: bossNamesMap.get(employee.employee_code) || "N/A"
+    }));
+    return employeesWithBossNames;
+}
+
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 9. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+
+
+export const getEmployeesWithBossChainNames = async () => {
+    let resEmployees = await fetch("http://localhost:5502/employees");
+    let employees = await resEmployees.json();
+    const getBossChain = (employee) => {
+        let bossChain = [];
+        let currentEmployee = employee;
+        while (currentEmployee.code_boss !== null) {
+            let boss = employees.find(emp => emp.employee_code === currentEmployee.code_boss);
+            if (!boss) break; 
+            let bossName = `${boss.name} ${boss.lastname1} ${boss.lastname2}`;
+            bossChain.unshift(bossName);
+            currentEmployee = boss;
+        }
+        return bossChain;
+    };
+    let employeesWithBossChainNames = employees.map(employee => ({
+        employee_name: `${employee.name} ${employee.lastname1} ${employee.lastname2}`,
+        boss_chain: getBossChain(employee)
+    }));
+    return employeesWithBossChainNames;
+}
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+
+export const getClientNamesByCodes = async (clientCodes) => {
+    try {
+        let res = await fetch("http://localhost:5501/clients");
+        let clients = await res.json();
+        let clientNames = clients
+            .filter(client => clientCodes.includes(client.client_code))
+            .map(client => client.client_name);
+        return clientNames;
+    } catch (error) {
+        console.error("Error al obtener los nombres de los clientes:", error);
+        return [];
+    }
+}
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+
+
+
+export const getCustomerProductRanges = async () => {
+    try { 
+        let resClients = await fetch("http://localhost:5501/clients");
+        let clients = await resClients.json();
+        let requests = await getRequests();
+        let deliveredRequests = requests.filter(request => request.status === "Entregado");
+        let customerProducts = {};
+        deliveredRequests.forEach(request => {
+            if (!customerProducts[request.code_client]) {
+                customerProducts[request.code_client] = new Set();
+            }
+            customerProducts[request.code_client].add(request.id);
+        });
+        let ranges = await getProductRanges();
+        let customerProductRangesList = [];
+        clients.forEach(client => {
+            let customerRange = {
+                clientId: client.client_code,
+                clientName: client.client_name,
+                productRanges: []
+            };
+            if (customerProducts[client.client_code]) {
+                customerProducts[client.client_code].forEach(productId => {
+                    let range = ranges.find(range => range.id === productId);
+                    if (range) {
+                        customerRange.productRanges.push(range.gama);
+                    }
+                });
+            }
+            customerProductRangesList.push(customerRange);
+        });
+        return customerProductRangesList;
+    } catch (error) {
+        console.error("Error al obtener las gamas de productos de los clientes:", error);
+        return [];
+    }
 }

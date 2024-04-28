@@ -19,3 +19,17 @@ export const getOrnamentalProductsOver100Units = async () => {
     }
 }
 
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+
+
+export const getProductRanges = async () => {
+    try {
+        let res = await fetch("http://localhost:5509/gama");
+        let ranges = await res.json();
+        return ranges;
+    } catch (error) {
+        console.error("Error al obtener los datos de las gamas de productos:", error);
+        return [];
+    }
+}

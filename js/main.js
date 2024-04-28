@@ -7,7 +7,7 @@ import {
 import {
     getAllEmployeersWithBossCODE7,
     getBOSS,
-    getAllNotRepresent
+    getAllNotRepresent,
 } from "../module/employees.js";
 
 import {
@@ -19,7 +19,10 @@ import {
     getClientsWithoutPaymentsAndSalesRepresentatives,
     getClientsWithPaymentsAndRepresentativesAndOffices,
     getClientsWithNoPaymentsAndRepresentativesAndOffices,
-    getOfficesWithClientsInFuenlabrada
+    getOfficesWithClientsInFuenlabrada,
+    getEmployeesWithBossNames,
+    getEmployeesWithBossChainNames,
+    getCustomerProductRanges
 } from "../module/clients.js";
 
 import {
@@ -27,7 +30,8 @@ import {
     getAllLateOrders,
     getEarlyOrders,
     getRejectedOrdersInYear,
-    getDeliveredOrdersInJanuary
+    getDeliveredOrdersInJanuary,
+    getLateDeliveriesClients
 } from "../module/requests.js";
 
 import {
@@ -41,4 +45,4 @@ import {
 } from "../module/gama.js";
 
 
-console.log(await getClientsEmploy());
+console.log(await getCustomerProductRanges());

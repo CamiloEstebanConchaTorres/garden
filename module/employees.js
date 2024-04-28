@@ -64,14 +64,11 @@ export const getEmployByCode = async(code) =>{
 // 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 // 5. Devuelve el nombre de los clientes que **no** hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 // 6. Lista la dirección de las oficinas que tengan clientes en `Fuenlabrada`.
+// 8. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
 
 export const getEmployees = async () => {
     let res = await fetch("http://localhost:5502/employees");
     let employees = await res.json();
     return employees;
 }
-
-
-
-
 

@@ -1,3 +1,10 @@
+// NECESARIO PARA EJERCICIO 10 DE LA SEGUNDA PARTE
+
+import { 
+    getClientNamesByCodes
+} from "./clients.js";
+
+
 // 7. Devuelve un listado con los distintos estados por los que puede pasar un pedido.
 
 export const getAllProductStatus = async () => {
@@ -122,5 +129,46 @@ export const getDeliveredOrdersInJanuary = async () => {
 }
 
 
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 10. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
 
 
+export const getLateDeliveriesClients = async () => {
+    try {
+        let res = await fetch("http://localhost:5508/requests");
+        let data = await res.json();
+        let lateDeliveries = data.filter(order => {
+            const deliveryDate = new Date(order.date_delivery);
+            const waitDate = new Date(order.date_wait);
+            return order.status === "Entregado" && deliveryDate > waitDate;
+        });
+        let lateClientsCodes = [...new Set(lateDeliveries.map(order => order.code_client))];
+        let lateClientsNames = await getClientNamesByCodes(lateClientsCodes);
+        let lateClients = lateClientsCodes.map((code, index) => {
+            return {
+                codigo: code,
+                nombre: lateClientsNames[index]
+            };
+        });
+        return lateClients;
+    } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        return [];
+    }
+}
+
+///////////////// SEGUNDA PARTE /////////////////////////////////////////
+// 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+
+
+
+export const getRequests = async () => {
+    try {
+        let res = await fetch("http://localhost:5508/requests");
+        let requests = await res.json();
+        return requests;
+    } catch (error) {
+        console.error("Error al obtener los datos de los pedidos:", error);
+        return [];
+    }
+}
