@@ -159,8 +159,9 @@ export const getLateDeliveriesClients = async () => {
 
 ///////////////// SEGUNDA PARTE /////////////////////////////////////////
 // 11. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
-
-
+// TAMBIEN //
+// TERCERA PARTE//
+// 2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
 
 export const getRequests = async () => {
     try {

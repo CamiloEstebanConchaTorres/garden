@@ -59,3 +59,18 @@ export const getUnpaidClients = async () => {
     let payments = await res.json();
     return payments;
 }
+
+////// TERCERA PARTE ///////////////////////////////
+// 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+
+
+export const getTransactions = async () => {
+    try {
+        const res = await fetch("http://localhost:5505/payments");
+        const transactions = await res.json();
+        return transactions;
+    } catch (error) {
+        console.error("Error al obtener los datos de las transacciones:", error);
+        return [];
+    }
+}

@@ -16,7 +16,8 @@ import {
 
 import { 
     getPayments,
-    getUnpaidClients
+    getUnpaidClients,
+    getTransactions
 } from "./payments.js";
 
 import { 
@@ -400,3 +401,71 @@ export const getCustomerProductRanges = async () => {
         return [];
     }
 }
+
+
+////// TERCERA PARTE ///////////////////////////////
+// 1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+
+
+const obtenerClientes = async () => {
+    try {
+        const res = await fetch("http://localhost:5501/clients");
+        const clients = await res.json();
+        return clients;
+    } catch (error) {
+        console.error("Error al obtener los datos de los clientes:", error);
+        return [];
+    }
+}
+export const getNonPayingClients = async () => {
+    try {
+        const transactions = await getTransactions();
+        const payingClients = new Set(transactions.map(transaction => transaction.code_client));
+        const clients = await obtenerClientes();
+        const nonPayingClients = clients
+            .filter(client => !payingClients.has(client.client_code))
+            .map(client => ({ nombre: client.client_name }));
+
+        return nonPayingClients;
+    } catch (error) {
+        console.error("Error al obtener los clientes que no han realizado ningún pago:", error);
+        return [];
+    }
+}
+
+////// TERCERA PARTE ///////////////////////////////
+// 2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
+
+
+export const getNonOrderingClients = async () => {
+    try {
+        const requests = await getRequests();
+        const orderingClients = new Set(requests.map(request => request.code_client));
+        const clients = await obtenerClientes(); 
+        const nonOrderingClients = clients
+            .filter(client => !orderingClients.has(client.client_code))
+            .map(client => ({ nombre: client.client_name })); 
+        return nonOrderingClients;
+    } catch (error) {
+        console.error("Error al obtener los clientes que no han realizado ningún pedido:", error);
+        return [];
+    }
+}
+
+
+////// TERCERA PARTE ///////////////////////////////
+// 3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
+
+export const getNonPayingAndOrderingClients = async () => {
+    try {
+        const nonPayingClients = await getNonPayingClients();
+        const nonOrderingClients = await getNonOrderingClients();
+        const combinedClientsSet = new Set([...nonPayingClients.map(client => client.nombre), ...nonOrderingClients.map(client => client.nombre)]);
+        const combinedClients = [...combinedClientsSet].map(clientName => ({ nombre: clientName }));
+        return combinedClients;
+    } catch (error) {
+        console.error("Error al obtener los clientes que no han realizado ningún pago ni pedido:", error);
+        return [];
+    }
+}
+

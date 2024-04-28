@@ -72,3 +72,21 @@ export const getEmployees = async () => {
     return employees;
 }
 
+//////////////// TERCERA PARTE ////////////
+// 4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
+
+export const getEmployeesWithoutOffice = async () => {
+    try {
+        let res = await fetch("http://localhost:5502/employees");
+        let employees = await res.json();
+        const employeesWithoutOffice = employees.filter(employee => !employee.code_office);
+        if (employeesWithoutOffice.length === 0) {
+            return "No hay empleados sin oficina asociada.";
+        } else {
+            return employeesWithoutOffice;
+        }
+    } catch (error) {
+        console.error("Error al obtener los empleados sin oficina asociada:", error);
+        return [];
+    }
+}

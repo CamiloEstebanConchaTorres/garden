@@ -798,3 +798,113 @@ queryAboutTable11part2.addEventListener("click", async(e)=>{
         report__container.innerHTML = plantilla;
     }
 })
+
+
+/////////////////// EJERCICIO 01 PARTE 3 ////////////////////////////////////////////////
+import { getNonPayingClients } from "../module/clients.js";
+const queryAboutTable1part3 = document.querySelector("#queryAboutTable1part3");
+queryAboutTable1part3.addEventListener("click", async(e)=>{
+    let [,report__container] = queryAboutTable1part3.children
+    if(!report__container.innerHTML){
+        let data = await getNonPayingClients();
+        let plantilla = "";
+        console.log(data);
+        data.forEach(val => {
+            plantilla += `
+                <div class="report__card">
+                <div class="card__title">
+                    <div>Clientes que no han realizado ningun pago</div>
+                </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                        <p><b>Nombre del cliente: </b>${val.nombre}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        report__container.innerHTML = plantilla;
+    }
+})
+
+/////////////////// EJERCICIO 02 PARTE 3 ////////////////////////////////////////////////
+import { getNonOrderingClients } from "../module/clients.js";
+const queryAboutTable2part3 = document.querySelector("#queryAboutTable2part3");
+queryAboutTable2part3.addEventListener("click", async(e)=>{
+    let [,report__container] = queryAboutTable2part3.children
+    if(!report__container.innerHTML){
+        let data = await getNonOrderingClients();
+        let plantilla = "";
+        console.log(data);
+        data.forEach(val => {
+            plantilla += `
+                <div class="report__card">
+                <div class="card__title">
+                    <div>Clientes que no han realizado ningun pedido</div>
+                </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                        <p><b>Nombre del cliente: </b>${val.nombre}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        report__container.innerHTML = plantilla;
+    }
+})
+
+
+/////////////////// EJERCICIO 03 PARTE 3 ////////////////////////////////////////////////
+import { getNonPayingAndOrderingClients } from "../module/clients.js";
+const queryAboutTable3part3 = document.querySelector("#queryAboutTable3part3");
+queryAboutTable3part3.addEventListener("click", async(e)=>{
+    let [,report__container] = queryAboutTable3part3.children
+    if(!report__container.innerHTML){
+        let data = await getNonPayingAndOrderingClients();
+        let plantilla = "";
+        console.log(data);
+        data.forEach(val => {
+            plantilla += `
+                <div class="report__card">
+                <div class="card__title">
+                    <div>Clientes que no han realizado ningun pago y ningun pedido</div>
+                </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                        <p><b>Nombre del cliente: </b>${val.nombre}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        report__container.innerHTML = plantilla;
+    }
+})
+
+/////////////////// EJERCICIO 04 PARTE 3 ////////////////////////////////////////////////
+import { getEmployeesWithoutOffice } from "../module/employees.js";
+const queryAboutTable4part3 = document.querySelector("#queryAboutTable4part3");
+queryAboutTable4part3.addEventListener("click", async(e)=>{
+    let [,report__container] = queryAboutTable4part3.children
+    if(!report__container.innerHTML){
+        let data = await getEmployeesWithoutOffice();
+        let plantilla = "";
+        console.log(data);
+        data.forEach(val => {
+            plantilla += `
+                <div class="report__card">
+                <div class="card__title">
+                    <div>Empleados que no tienen una oficina asociada</div>
+                </div>
+                <div class="card__body">
+                    <div class="body__marck">
+                        <p><b>Nombre del cliente: </b>${val.name}</p>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        report__container.innerHTML = plantilla;
+    }
+})
