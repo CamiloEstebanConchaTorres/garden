@@ -1,6 +1,6 @@
 // NECESARIO PARA EJERCICIO 10 DE LA SEGUNDA PARTE
 
-import { 
+import {
     getClientNamesByCodes
 } from "./clients.js";
 
@@ -9,7 +9,7 @@ import {
 
 export const getAllProductStatus = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests?status");
+        let res = await fetch("http://localhost:5308/requests?status");
         let data = await res.json();
         let uniqueStatus = new Set();
         data.forEach(val => {
@@ -30,7 +30,7 @@ export const getAllProductStatus = async () => {
 
 export const getAllLateOrders = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests?status");
+        let res = await fetch("http://localhost:5308/requests?status");
         let data = await res.json();
         let lateOrders = data.filter(order => order.status === "Pendiente" && (
             (order.date_delivery !== null && new Date(order.date_delivery) > new Date(order.date_wait)) ||
@@ -57,7 +57,7 @@ export const getAllLateOrders = async () => {
 
 export const getEarlyOrders = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests?status");
+        let res = await fetch("http://localhost:5308/requests?status");
         let data = await res.json();
         let earlyOrders = data.filter(order => order.date_delivery !== null && new Date(order.date_delivery) < new Date(order.date_wait) - (2 * 24 * 60 * 60 * 1000));
         let earlyOrdersList = earlyOrders.map(order => {
@@ -79,7 +79,7 @@ export const getEarlyOrders = async () => {
 
 export const getRejectedOrdersInYear = async (year) => {
     try {
-        let res = await fetch("http://localhost:5508/requests?status");
+        let res = await fetch("http://localhost:5308/requests?status");
         let data = await res.json();
         let rejectedOrders = data.filter(order => {
             const orderDate = new Date(order.date_request);
@@ -105,7 +105,7 @@ export const getRejectedOrdersInYear = async (year) => {
 
 export const getDeliveredOrdersInJanuary = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests?status");
+        let res = await fetch("http://localhost:5308/requests?status");
         let data = await res.json();
         let deliveredOrdersInJanuary = data.filter(order => {
             const deliveryDate = new Date(order.date_delivery);
@@ -135,7 +135,7 @@ export const getDeliveredOrdersInJanuary = async () => {
 
 export const getLateDeliveriesClients = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests");
+        let res = await fetch("http://localhost:5308/requests");
         let data = await res.json();
         let lateDeliveries = data.filter(order => {
             const deliveryDate = new Date(order.date_delivery);
@@ -165,7 +165,7 @@ export const getLateDeliveriesClients = async () => {
 
 export const getRequests = async () => {
     try {
-        let res = await fetch("http://localhost:5508/requests");
+        let res = await fetch("http://localhost:5308/requests");
         let requests = await res.json();
         return requests;
     } catch (error) {

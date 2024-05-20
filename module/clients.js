@@ -3,28 +3,27 @@
 // EJERCICIO 03, EJERCICIO 04, EJERCICIO 05, 
 // EJERCICIO 06, EJERCICIO 08, EJERCICIO 09 
 // DE LA SEGUNDA PARTE/////
-import { 
+import {
     getEmployByCode,
     getEmployees
 } from "./employees.js";
 
-import { 
-    getOfficesByCode,
+import {
     getOffices,
-
+    getOfficesByCode,
 } from "./offices.js";
 
-import { 
+import {
     getPayments,
-    getUnpaidClients,
-    getTransactions
+    getTransactions,
+    getUnpaidClients
 } from "./payments.js";
 
-import { 
+import {
     getRequests
 } from "./requests.js";
 
-import { 
+import {
     getProductRanges
 } from "./gama.js";
 
@@ -35,7 +34,7 @@ import {
 //6. Devuelve un listado con el nombre de los todos los clientes españoles.
 
 export const getAllClientSpanishPeople = async  () => {
-    let res = await fetch("http://localhost:5501/clients?country=Spain")
+    let res = await fetch("http://localhost:5301/clients?country=Spain")
     let data = await res.json();
     let dataUpdate = [];
     data.forEach(val => {
@@ -50,7 +49,7 @@ export const getAllClientSpanishPeople = async  () => {
 
 export const getClientsInMadridWithSalesRepresentatives = async () => {
     try {
-        let res = await fetch("http://localhost:5501/clients");
+        let res = await fetch("http://localhost:5301/clients");
         let data = await res.json();
         let filteredClients = data.filter(client => {
             return client.city === "Madrid" && (client.code_employee_sales_manager === 11 || client.code_employee_sales_manager === 30);
@@ -77,7 +76,7 @@ export const getClientsInMadridWithSalesRepresentatives = async () => {
 // junto con la ciudad de la oficina a la que pertenece el representante.
 
 export const getClientsEmploy = async() =>{
-    let res = await fetch("http://localhost:5501/clients");
+    let res = await fetch("http://localhost:5301/clients");
     let clients = await res.json();
     for (let i = 0; i < clients.length; i++) {
         let {
@@ -142,7 +141,7 @@ export const getClientsEmploy = async() =>{
 // 1. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
 
 export const getClientSalesRepresentatives = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let employees = await getEmployees();
     let clientSalesRepresentatives = [];
@@ -161,7 +160,7 @@ export const getClientSalesRepresentatives = async () => {
 // 2. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas.
 
 export const getClientsWithSalesRepresentativesAndPayments = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let payments = await getPayments();
     let employees = await getEmployees();
@@ -186,7 +185,7 @@ export const getClientsWithSalesRepresentativesAndPayments = async () => {
 // 3. Muestra el nombre de los clientes que **no** hayan realizado pagos junto con el nombre de sus representantes de ventas.
 
 export const getClientsWithoutPaymentsAndSalesRepresentatives = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let unpaidClients = await getUnpaidClients(); 
     let employees = await getEmployees();
@@ -213,7 +212,7 @@ export const getClientsWithoutPaymentsAndSalesRepresentatives = async () => {
 // 4. Devuelve el nombre de los clientes que han hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 
 export const getClientsWithPaymentsAndRepresentativesAndOffices = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let payments = await getPayments();
     let employees = await getEmployees();
@@ -241,7 +240,7 @@ export const getClientsWithPaymentsAndRepresentativesAndOffices = async () => {
 // 5. Devuelve el nombre de los clientes que **no** hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
 
 export const getClientsWithNoPaymentsAndRepresentativesAndOffices = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let payments = await getPayments(); 
     let employees = await getEmployees();
@@ -275,7 +274,7 @@ export const getClientsWithNoPaymentsAndRepresentativesAndOffices = async () => 
 
 
 export const getOfficesWithClientsInFuenlabrada = async () => {
-    let resClients = await fetch("http://localhost:5501/clients");
+    let resClients = await fetch("http://localhost:5301/clients");
     let clients = await resClients.json();
     let employees = await getEmployees();
     let offices = await getOffices();
@@ -297,7 +296,7 @@ export const getOfficesWithClientsInFuenlabrada = async () => {
 
 
 export const getEmployeesWithBossNames = async () => {
-    let resEmployees = await fetch("http://localhost:5502/employees");
+    let resEmployees = await fetch("http://localhost:5302/employees");
     let employees = await resEmployees.json();
     let bossNamesMap = new Map();
     employees.forEach(employee => {
@@ -321,7 +320,7 @@ export const getEmployeesWithBossNames = async () => {
 
 
 export const getEmployeesWithBossChainNames = async () => {
-    let resEmployees = await fetch("http://localhost:5502/employees");
+    let resEmployees = await fetch("http://localhost:5302/employees");
     let employees = await resEmployees.json();
     const getBossChain = (employee) => {
         let bossChain = [];
@@ -347,7 +346,7 @@ export const getEmployeesWithBossChainNames = async () => {
 
 export const getClientNamesByCodes = async (clientCodes) => {
     try {
-        let res = await fetch("http://localhost:5501/clients");
+        let res = await fetch("http://localhost:5301/clients");
         let clients = await res.json();
         let clientNames = clients
             .filter(client => clientCodes.includes(client.client_code))
@@ -366,7 +365,7 @@ export const getClientNamesByCodes = async (clientCodes) => {
 
 export const getCustomerProductRanges = async () => {
     try { 
-        let resClients = await fetch("http://localhost:5501/clients");
+        let resClients = await fetch("http://localhost:5301/clients");
         let clients = await resClients.json();
         let requests = await getRequests();
         let deliveredRequests = requests.filter(request => request.status === "Entregado");
@@ -409,7 +408,7 @@ export const getCustomerProductRanges = async () => {
 
 const obtenerClientes = async () => {
     try {
-        const res = await fetch("http://localhost:5501/clients");
+        const res = await fetch("http://localhost:5301/clients");
         const clients = await res.json();
         return clients;
     } catch (error) {

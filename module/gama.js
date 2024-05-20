@@ -2,7 +2,7 @@
 
 export const getOrnamentalProductsOver100Units = async () => {
     try {
-        let res = await fetch("http://localhost:5503/gama");
+        let res = await fetch("http://localhost:5303/gama");
         let data = await res.json();
         let filteredProducts = data.filter(product => {
             return product.gama === "Ornamentales" && product.stock > 100;
