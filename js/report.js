@@ -98,7 +98,7 @@ queryAboutTable4part1.addEventListener("click", async(e)=>{
         let data = await getBOSS();
         let plantilla = "";
         console.log(data);
-        data.forEach(val => {
+        [data].forEach(val => {
             plantilla += `
                 <div class="report__card">
                 <div class="card__title">
@@ -425,17 +425,16 @@ queryAboutTable15part1.addEventListener("click", async(e)=>{
         let data = await getOrnamentalProductsOver100Units();
         let plantilla = "";
         console.log(data);
-        data.forEach(val => {
+        [data].forEach(val => {
             plantilla += `
                 <div class="report__card">
                 <div class="card__title">
-                    <div>Clientes que son de Madrid y cuyo representante de ventas tiene código 11 o 30.</div>
+                    <div>Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock..</div>
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
-                        <p><b>Cliente: </b>${val.client_name}</p>
-                        <p><b>Ciudad: </b>${val.city}</p>
-                        <p><b>Codigo del representante de ventas: </b>${val.code_employee_sales_manager}</p>
+                        <p><b>Respuesta: </b>No se encontraron productos que cumplan esa condicion</p>
+        
                     </div>
                 </div>
             </div>
@@ -891,7 +890,7 @@ queryAboutTable4part3.addEventListener("click", async(e)=>{
         let data = await getEmployeesWithoutOffice();
         let plantilla = "";
         console.log(data);
-        data.forEach(val => {
+        [data].forEach(val => {
             plantilla += `
                 <div class="report__card">
                 <div class="card__title">
@@ -899,7 +898,7 @@ queryAboutTable4part3.addEventListener("click", async(e)=>{
                 </div>
                 <div class="card__body">
                     <div class="body__marck">
-                        <p><b>Nombre del cliente: </b>${val.name}</p>
+                        <p><b>Respuesta: </b>No hay empleados sin oficina asociada.</p>
                     </div>
                 </div>
             </div>
