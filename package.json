@@ -5,6 +5,8 @@
   "main": "js/main.js",
   "type": "module",
   "scripts": {
+    "close" : "fuser -k 5301/tcp & fuser -k 5302/tcp & fuser -k 5303/tcp & fuser -k 5304/tcp & fuser -k 5305/tcp & fuser -k 5306/tcp & fuser -k 5307/tcp & fuser -k 5308/tcp",
+    "server" : "json-server ./js/db/clients.json --port 5301 & json-server ./js/db/employees.json --port 5302 & json-server ./js/db/gama.json --port 5303 & json-server ./js/db/offices.json --port 5304 & json-server ./js/db/payments.json --port 5305 & json-server ./js/db/products.json --port 5306 & json-server ./js/db/request_details.json --port 5307 & json-server ./js/db/requests.json --port 5308",
     "start-all": "npm run clients & npm run employees & npm run gama & npm run offices & npm run payments & npm run products & npm run request_details & npm run requests & npm run dev",
     "dev": "node --watch js/main.js",
     "clients": "json-server -h 172.16.101.146 js/db/clients.json -p 5301",
