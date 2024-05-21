@@ -2,7 +2,7 @@
 
 export const getOrnamentalProductsOver100Units = async () => {
     try {
-        let res = await fetch("http://localhost:5303/gama");
+        let res = await fetch("http://172.16.101.146:5303/gama");
         let data = await res.json();
         let filteredProducts = data.filter(product => {
             return product.gama === "Ornamentales" && product.stock > 100;
@@ -25,7 +25,7 @@ export const getOrnamentalProductsOver100Units = async () => {
 
 export const getProductRanges = async () => {
     try {
-        let res = await fetch("http://localhost:5509/gama");
+        let res = await fetch("http://172.16.101.146:5509/gama");
         let ranges = await res.json();
         return ranges;
     } catch (error) {
